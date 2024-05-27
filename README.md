@@ -1,0 +1,1 @@
+# Repositório do Sistema para Gerenciamento de Experimentos com EEG do Sinapsense.
