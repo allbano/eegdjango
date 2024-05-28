@@ -1,0 +1,66 @@
+{% extends 'base.html' %} 
+{% load static  %}
+
+{% block 'head' %}
+  <link rel="stylesheet" href="{% static 'usuarios/css/usuarios.css' %}" />
+{% endblock 'head' %}
+
+{% block 'header' %}
+  {% include "partials/navbar.html" %}
+{% endblock 'header' %}
+
+
+{% block 'body' %}
+<div class="container flex border border-primary p-3 my-3">
+  <div class="col">
+    <div class="row p-3">
+      <h1 class="text-center">Cadastro de Usuário</h1>
+          {% if messages %}
+            {% for message in messages %}
+              <section class="alert {{message.tags}}" role="alert">
+                {{message}}
+              </section>
+            {% endfor %} 
+          {% endif %}
+    </div><hr>
+    <div class="row p-3">
+        <h5>Preencha os Dados do usuário</h5>
+          <form id="registerUser" class="registerUser needs-validation" action="{% url 'cadastro' %}" method="POST" novalidate> {% csrf_token %}
+            <input type="hidden" name="_csrf" value="" /> 
+          <div class="row mb-3 g-2">
+            <div class="col input-group mb-2">
+              <label for="first_name" class="input-group-text">Nome</label>
+              <input  type="text" class="form-control" id="first_name" name="first_name" placeholder="Digite seu nome..." autocomplete="off"/>
+            </div>
+            <div class="col input-group mb-2">
+              <label for="last_name" class="input-group-text">Sobrenome</label>
+              <input  type="text" class="form-control" id="last_name" name="last_name" placeholder="Digite seu sobrenome..." autocomplete="off"/>
+            </div>
+            <div class="input-group mb-4">
+              <label for="username" class="input-group-text">Username</label>
+              <input  type="text" class="form-control" id="username" name="username" placeholder="Digite seu username..." autocomplete="off"/>
+            </div>
+            <hr>
+            <h5 class="mt-2">Dados de login</h5>
+            <div class="input-group">
+              <label for="email" class="input-group-text">E-mail</label>
+              <input  type="email" id="email" name="email" class="form-control" placeholder="Digite seu email...">
+            </div>
+            <div class="input-group">
+              <label for="password" class="input-group-text">Senha</label>
+              <input type="password" id="password" name="password" class="form-control" placeholder="Digite a senha...">
+            </div>
+            <div class="input-group">
+              <label for="cpassword" class="input-group-text">Confirmar Senha</label>
+              <input type="password" id="cpassword" name="cpassword" class="form-control" placeholder="Confirme a senha...">
+            </div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+              <button type="submit" class="btn btn-primary px-3 py-2 col-3">Criar Usuário</button>
+              <a href="{% url 'home' %}" class="btn btn-secondary px-3 py-2 col-3">Voltar</a>
+            </div>
+          </div>
+          </form>
+      </div>
+  </div>
+</div>
+{% endblock 'body' %}

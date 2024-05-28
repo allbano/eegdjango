@@ -1,0 +1,53 @@
+{% extends 'base.html' %} 
+{% load static  %}
+
+{% block 'head' %}
+  <link rel="stylesheet" href="{% static 'usuarios/css/login.css' %}" />
+{% endblock 'head' %}
+
+{% block 'body' %}
+
+<div class="container my-3 bg-info rounded">
+    <div class="row p-3 rounded">
+      <img src="https://sinapsense.ufpr.br/wp-content/uploads/2023/02/banner-site.jpg" alt="" class="img-fluid" />
+    </div>
+    <div class="row p-3 rounded">
+      <div class="col">
+        
+        <hr>
+            <h1 class="text-center m-3">Faça seu login</h1>
+                {% if messages %}
+                    {% for message in messages %}
+                        <section class="alert {{message.tags}}" role="alert">
+                        {{message}}
+                        </section>
+                    {% endfor %} 
+                {% endif %}
+            <form id="form-login" class="form-login needs-validation" action="{% url 'login' %}" method="POST" novalidate> {% csrf_token %}
+                {% csrf_token %}
+              <div class="mb-3 input-group">
+                  <label for="username" class="input-group-text">Username</label>
+                  <input type="username" class="form-control" id="username" name="username" placeholder="Digite seu username..." required autocomplete="off" pattern="[a-z0-9._%+-]+@+[a-z0-9.-]+.[a-z]{2,4}$" />
+                  <div class="invalid-feedback">
+                    Você deve digitar um endereço de email válido!
+                  </div>
+              </div>
+              <div class="mb-3 input-group">
+                <label for="pass" class="input-group-text">Senha</label>
+                <input type="password" class="form-control" id="pass" name="password" placeholder="Digite sua senha..." required autocomplete="off" />
+                <div class="invalid-feedback">
+                    Você deve digitar sua senha!
+                </div>
+              </div>
+              <div class="d-grid justify-content-end m-3">
+                <button type="submit" class="btn btn-primary">Fazer Login</button>
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock 'body' %}
+
+
+
